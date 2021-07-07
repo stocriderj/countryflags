@@ -3,5 +3,28 @@ body {
 }
 
 #feedback {
-    transition: color 0.3s;
+    transition: color 1s;
+}
+
+/* Game */
+
+#game {
+    position: relative;
+    background: rgb(19, 0, 31) url("https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_640.png") center center no-repeat;
+    padding: 100px;
+    border-radius: 50px;
+    height: 600px;
+}
+
+#user-input {
+    display: inline-block;
+    padding: 30px;
+}
+
+#feedback {
+    background: rgb(87, 84, 84);
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 100px;
 }

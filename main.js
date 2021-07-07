@@ -43,7 +43,7 @@ const countryFlagPairs = [
 
 function chooseCountryFlagPair() {
     try {
-        chosenCountryFlagPair = countryFlagPairs[randint(countryFlagPairs.length) - 1];
+        chosenCountryFlagPair = countryFlagPairs[randint(countryFlagPairs.length - 1)];
         flagDisplay.setAttribute("src", chosenCountryFlagPair[1]);
     } catch {
         flagDisplay.setAttribute("src", "https://image.freepik.com/free-vector/error-404-page-found-page-found-text-oops-looks-like-something-went-wrong_143407-2.jpg");
@@ -58,14 +58,16 @@ gameForm.addEventListener("submit", (event) => {
     const userInput = document.getElementById("user-answer");
     const userAnswer = userInput.value;
     if (userAnswer.toLowerCase() === chosenCountryFlagPair[0]) {
-        const successMessages = ["Good job!", "Wow!", "Great job!", "Amazing!", "Check!", "Correct!"];
+        const successMessages = ["Good job!", "Wow!", "Great job!", "Amazing!", "Check!", "Correct!", "Smart!", "Boy, are you overtaught!", "Not bad!", "Not bad at all!", "Not bad. Not bad at all!"];
 
         userInput.value = "";
         chooseCountryFlagPair();
-        feedbackDisplay.innerHTML = successMessages[randint(successMessages.length)];
-        feedbackDisplay.setAttribute("style", "color: green;");
+        feedbackDisplay.innerHTML = successMessages[randint(successMessages.length - 1)];
+        feedbackDisplay.classList.remove("text-danger");
+        feedbackDisplay.classList.add("text-success");
     } else {
-        feedbackDisplay.innerHTML = "Nope, that's not it. Try again!"
-        feedbackDisplay.setAttribute("style", "color: #d0201a;");
+        feedbackDisplay.innerHTML = "Nope, that's not it. Try again!";
+        feedbackDisplay.classList.remove("text-success");
+        feedbackDisplay.classList.add("text-danger");
     }
 });

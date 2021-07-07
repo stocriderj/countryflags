@@ -1,0 +1,7 @@
+body {
+    margin: 20px;
+}
+
+#feedback {
+    transition: color 0.3s;
+}

@@ -42,8 +42,11 @@ const countryFlagPairs = [
 ];
 
 function chooseCountryFlagPair() {
+    const oldCountryFlagPair = chosenCountryFlagPair;
     try {
-        chosenCountryFlagPair = countryFlagPairs[randint(countryFlagPairs.length - 1)];
+        while (oldCountryFlagPair === chosenCountryFlagPair) {
+            chosenCountryFlagPair = countryFlagPairs[randint(countryFlagPairs.length - 1)];
+        }
         flagDisplay.setAttribute("src", chosenCountryFlagPair[1]);
     } catch {
         flagDisplay.setAttribute("src", "https://image.freepik.com/free-vector/error-404-page-found-page-found-text-oops-looks-like-something-went-wrong_143407-2.jpg");
@@ -62,7 +65,13 @@ gameForm.addEventListener("submit", (event) => {
 
         userInput.value = "";
         chooseCountryFlagPair();
-        feedbackDisplay.innerHTML = successMessages[randint(successMessages.length - 1)];
+
+        const oldSuccessFeedback = feedbackDisplay.innerText;
+        var successFeedback = feedbackDisplay.innerText;
+        while (oldSuccessFeedback === successFeedback) {
+            successFeedback = successMessages[randint(successMessages.length - 1)];
+        }
+        feedbackDisplay.innerHTML = successFeedback;
         feedbackDisplay.classList.remove("text-danger");
         feedbackDisplay.classList.add("text-success");
     } else {

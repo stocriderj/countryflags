@@ -6,6 +6,11 @@ body {
     transition: color 1s;
 }
 
+.form-control {
+    padding: 5px;
+    padding-left: 20px;
+}
+
 /* Game */
 
 #game {
@@ -16,9 +21,10 @@ body {
     height: 600px;
 }
 
-#user-input {
+#user-answer {
+    border-radius: 10px;
+    width: 50%;
     display: inline-block;
-    padding: 30px;
 }
 
 #feedback {

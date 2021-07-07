@@ -10,6 +10,17 @@ const gameForm = document.getElementById("user-answer-form");
 var chosenCountryFlagPair = null;
 const feedbackDisplay = document.getElementById("feedback");
 
+// Declare Game Variables
+var usedHint = false;
+
+// Functions to make my life ez-er
+feedbackFormatFunctions = {
+    red: () => {
+        feedbackDisplay.classList.remove("text-success");
+        feedbackDisplay.classList.add("text-danger");
+    }
+};
+
 const countryFlagPairs = [
     ["afghanistan", "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Afghanistan.svg"],
     ["albania", "https://upload.wikimedia.org/wikipedia/commons/3/36/Flag_of_Albania.svg"],
@@ -53,6 +64,21 @@ function chooseCountryFlagPair() {
     }
 }
 
+function giveUp() {
+    const giveUpMessages = ["Aw, man, I really thought you'd get it!", "Dang!", "Aw man.", "Ha! I thought so!", ":(", "Don't worry, we learn something new every day."];
+
+    usedHint = true;
+
+    feedbackFormatFunctions.red();
+
+    const oldFeedback = feedbackDisplay.innerText;
+    var giveUpFeedback = feedbackDisplay.innerText;
+    while (oldFeedback === giveUpFeedback) {
+        giveUpFeedback = giveUpMessages[randint(giveUpMessages.length - 1)];
+    }
+    feedbackDisplay.innerHTML = giveUpFeedback + ` It was ${chosenCountryFlagPair[0].toUpperCase()}.`;
+}
+
 chooseCountryFlagPair();
 
 gameForm.addEventListener("submit", (event) => {
@@ -62,21 +88,31 @@ gameForm.addEventListener("submit", (event) => {
     const userAnswer = userInput.value;
     if (userAnswer.toLowerCase() === chosenCountryFlagPair[0]) {
         const successMessages = ["Good job!", "Wow!", "Great job!", "Amazing!", "Check!", "Correct!", "Smart!", "Boy, are you overtaught!", "Not bad!", "Not bad at all!", "Not bad. Not bad at all!"];
+        const iToldYouMessages = ["Well, at least you learn from your mistakes.", "Don't ask me for answers all the time, por favor y gracias.", "See? I'm <em>never</em> wrong!"];
 
         userInput.value = "";
         chooseCountryFlagPair();
 
-        const oldSuccessFeedback = feedbackDisplay.innerText;
+        const oldFeedback = feedbackDisplay.innerText;
         var successFeedback = feedbackDisplay.innerText;
-        while (oldSuccessFeedback === successFeedback) {
-            successFeedback = successMessages[randint(successMessages.length - 1)];
+        if (usedHint) {
+            while (oldFeedback === successFeedback) {
+                successFeedback = iToldYouMessages[randint(iToldYouMessages.length - 1)];
+            }
+            feedbackDisplay.innerHTML = successFeedback;
+            feedbackDisplay.classList.remove("text-danger");
+            feedbackDisplay.classList.add("text-success");
+        } else {
+            while (oldFeedback === successFeedback) {
+                successFeedback = successMessages[randint(successMessages.length - 1)];
+            }
+            feedbackDisplay.innerHTML = successFeedback;
+            feedbackDisplay.classList.remove("text-danger");
+            feedbackDisplay.classList.add("text-success");
         }
-        feedbackDisplay.innerHTML = successFeedback;
-        feedbackDisplay.classList.remove("text-danger");
-        feedbackDisplay.classList.add("text-success");
     } else {
         feedbackDisplay.innerHTML = "Nope, that's not it. Try again!";
-        feedbackDisplay.classList.remove("text-success");
-        feedbackDisplay.classList.add("text-danger");
+        feedbackFormatFunctions.red();
     }
+    usedHint = false;
 });

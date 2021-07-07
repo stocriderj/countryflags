@@ -2,9 +2,9 @@ body {
     margin: 20px;
 }
 
-#feedback {
+/* #feedback {
     transition: color 1s;
-}
+} */
 
 .form-control {
     padding: 5px;
@@ -28,7 +28,7 @@ body {
 }
 
 #feedback {
-    background: rgb(87, 84, 84);
+    background: rgb(68, 66, 66);
     width: 300px;
     padding: 10px;
     text-align: center;

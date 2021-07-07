@@ -1,2 +1,2 @@
 # Country Quiz
-WIP - A country quiz.
+__How many flags can _you_ recognize?__

@@ -53,8 +53,8 @@ const incorrect = [new Audio("sounds/incorrect/incorrect1.wav")];
 
 // Declare Game Variables
 var usedHint = false;
-var score = 0;
-var streak = 0;
+var score = localStorage.getItem("score");
+var streak = localStorage.getItem("streak");
 
 // Functions to make my life ez-er
 feedbackFormatFunctions = {
@@ -136,6 +136,10 @@ gameForm.addEventListener("submit", (event) => {
 
                 score++;
                 streak++;
+
+                localStorage.setItem("score", score);
+                localStorage.setItem("streak", streak);
+
                 scoreDisplay.innerText = score;
 
                 if (streak > 1) {

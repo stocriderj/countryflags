@@ -2,30 +2,8 @@ function randint(max) {
     return Math.round(Math.random() * max);
 }
 
-// Flags
-
 // Declare Game Elements
-// HTML Elements
-const flagDisplay = document.getElementById("flagDisplay");
-const gameForm = document.getElementById("user-answer-form");
-var chosenCountryFlagPair = null;
-const feedbackDisplay = document.getElementById("feedback");
-const scoreDisplay = document.getElementById("score");
-// Sounds
-const correct = [new Audio("sounds/correct/correct1.wav"), new Audio("sounds/correct/correct2.wav"), new Audio("sounds/correct/correct3.wav"), new Audio("sounds/correct/correct4.wav"), new Audio("sounds/correct/correct5.wav")];
-
-// Declare Game Variables
-var usedHint = false;
-var score = 0;
-
-// Functions to make my life ez-er
-feedbackFormatFunctions = {
-    red: () => {
-        feedbackDisplay.classList.remove("text-success");
-        feedbackDisplay.classList.add("text-danger");
-    }
-};
-
+// Flags and their respective countries
 const countryFlagPairs = [
     ["afghanistan", "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Afghanistan.svg"],
     ["albania", "https://upload.wikimedia.org/wikipedia/commons/3/36/Flag_of_Albania.svg"],
@@ -56,6 +34,36 @@ const countryFlagPairs = [
     ["burkina faso", "https://upload.wikimedia.org/wikipedia/commons/3/31/Flag_of_Burkina_Faso.svg"],
     ["burundi", "https://upload.wikimedia.org/wikipedia/commons/5/50/Flag_of_Burundi.svg"]
 ];
+
+// HTML Elements
+const flagDisplay = document.getElementById("flagDisplay");
+const gameForm = document.getElementById("user-answer-form");
+var chosenCountryFlagPair = null;
+const feedbackDisplay = document.getElementById("feedback");
+const scoreDisplay = document.getElementById("score");
+const streakDisplay = document.getElementById("streak");
+// Sounds
+const correct = [new Audio("sounds/correct/correct1.wav"), new Audio("sounds/correct/correct2.wav"), new Audio("sounds/correct/correct3.wav"), new Audio("sounds/correct/correct4.wav"), new Audio("sounds/correct/correct5.wav")];
+
+// Declare Game Variables
+var usedHint = false;
+var score = 0;
+var streak = 0;
+
+// Functions to make my life ez-er
+feedbackFormatFunctions = {
+    red: () => {
+        feedbackDisplay.classList.remove("text-success");
+        feedbackDisplay.classList.add("text-danger");
+    }
+};
+
+function incorrectAnswer() {
+    scoreDisplay.classList.remove("text-success");
+    streakDisplay.classList.remove("text-success");
+    streak = 0;
+    streakDisplay.innerText = "";
+}
 
 function chooseCountryFlagPair() {
     const oldCountryFlagPair = chosenCountryFlagPair;
@@ -109,7 +117,7 @@ gameForm.addEventListener("submit", (event) => {
                 feedbackDisplay.classList.remove("text-danger");
                 feedbackDisplay.classList.add("text-success");
 
-                scoreDisplay.classList.remove("text-success");
+                incorrectAnswer();
             } else {
                 while (oldFeedback === successFeedback) {
                     successFeedback = successMessages[randint(successMessages.length - 1)];
@@ -119,8 +127,14 @@ gameForm.addEventListener("submit", (event) => {
                 feedbackDisplay.classList.add("text-success");
 
                 score++;
+                streak++;
                 scoreDisplay.innerText = score;
-                scoreDisplay.classList.add("text-success");
+
+                if (streak > 1) {
+                    scoreDisplay.classList.add("text-success");
+                    streakDisplay.classList.add("text-success");
+                    streakDisplay.innerText = streak;
+                }
 
                 correct[randint(correct.length - 1)].play();
             }
@@ -128,7 +142,7 @@ gameForm.addEventListener("submit", (event) => {
             feedbackDisplay.innerHTML = "Nope, that's not it. Try again!";
             feedbackFormatFunctions.red();
 
-            scoreDisplay.classList.remove("text-success");
+            incorrectAnswer();
         }
         usedHint = false;
     }

@@ -49,6 +49,7 @@ const scoreDisplay = document.getElementById("score");
 const streakDisplay = document.getElementById("streak");
 // Sounds
 const correct = [new Audio("sounds/correct/correct1.wav"), new Audio("sounds/correct/correct2.wav"), new Audio("sounds/correct/correct3.wav"), new Audio("sounds/correct/correct4.wav"), new Audio("sounds/correct/correct5.wav")];
+const incorrect = [new Audio("sounds/incorrect/incorrect1.wav")];
 
 // Declare Game Variables
 var usedHint = false;
@@ -150,6 +151,8 @@ gameForm.addEventListener("submit", (event) => {
             feedbackFormatFunctions.red();
 
             incorrectAnswer();
+
+            incorrect[randint(incorrect.length - 1)].play();
         }
         usedHint = false;
     }

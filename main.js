@@ -5,13 +5,18 @@ function randint(max) {
 // Flags
 
 // Declare Game Elements
+// HTML Elements
 const flagDisplay = document.getElementById("flagDisplay");
 const gameForm = document.getElementById("user-answer-form");
 var chosenCountryFlagPair = null;
 const feedbackDisplay = document.getElementById("feedback");
+const scoreDisplay = document.getElementById("score");
+// Sounds
+const correct = [new Audio("sounds/correct/correct1.wav"), new Audio("sounds/correct/correct2.wav"), new Audio("sounds/correct/correct3.wav"), new Audio("sounds/correct/correct4.wav"), new Audio("sounds/correct/correct5.wav")];
 
 // Declare Game Variables
 var usedHint = false;
+var score = 0;
 
 // Functions to make my life ez-er
 feedbackFormatFunctions = {
@@ -86,33 +91,40 @@ gameForm.addEventListener("submit", (event) => {
 
     const userInput = document.getElementById("user-answer");
     const userAnswer = userInput.value;
-    if (userAnswer.toLowerCase() === chosenCountryFlagPair[0]) {
-        const successMessages = ["Good job!", "Wow!", "Great job!", "Amazing!", "Check!", "Correct!", "Smart!", "Boy, are you overtaught!", "Not bad!", "Not bad at all!", "Not bad. Not bad at all!"];
-        const iToldYouMessages = ["Well, at least you learn from your mistakes.", "Don't ask me for answers all the time, por favor y gracias.", "See? I'm <em>never</em> wrong!"];
+    if (userAnswer) {
+        if (userAnswer.toLowerCase() === chosenCountryFlagPair[0]) {
+            const successMessages = ["Good job!", "Wow!", "Great job!", "Amazing!", "Check!", "Correct!", "Smart!", "Boy, are you overtaught!", "Not bad!", "Not bad at all!", "Not bad. Not bad at all!"];
+            const iToldYouMessages = ["Well, at least you learn from your mistakes.", "Don't ask me for answers all the time, por favor y gracias.", "See? I'm <em>never</em> wrong!"];
 
-        userInput.value = "";
-        chooseCountryFlagPair();
+            userInput.value = "";
+            chooseCountryFlagPair();
 
-        const oldFeedback = feedbackDisplay.innerText;
-        var successFeedback = feedbackDisplay.innerText;
-        if (usedHint) {
-            while (oldFeedback === successFeedback) {
-                successFeedback = iToldYouMessages[randint(iToldYouMessages.length - 1)];
+            const oldFeedback = feedbackDisplay.innerText;
+            var successFeedback = feedbackDisplay.innerText;
+            if (usedHint) {
+                while (oldFeedback === successFeedback) {
+                    successFeedback = iToldYouMessages[randint(iToldYouMessages.length - 1)];
+                }
+                feedbackDisplay.innerHTML = successFeedback;
+                feedbackDisplay.classList.remove("text-danger");
+                feedbackDisplay.classList.add("text-success");
+            } else {
+                while (oldFeedback === successFeedback) {
+                    successFeedback = successMessages[randint(successMessages.length - 1)];
+                }
+                feedbackDisplay.innerHTML = successFeedback;
+                feedbackDisplay.classList.remove("text-danger");
+                feedbackDisplay.classList.add("text-success");
+
+                score++;
+                scoreDisplay.innerText = score;
+
+                correct[randint(correct.length - 1)].play();
             }
-            feedbackDisplay.innerHTML = successFeedback;
-            feedbackDisplay.classList.remove("text-danger");
-            feedbackDisplay.classList.add("text-success");
         } else {
-            while (oldFeedback === successFeedback) {
-                successFeedback = successMessages[randint(successMessages.length - 1)];
-            }
-            feedbackDisplay.innerHTML = successFeedback;
-            feedbackDisplay.classList.remove("text-danger");
-            feedbackDisplay.classList.add("text-success");
+            feedbackDisplay.innerHTML = "Nope, that's not it. Try again!";
+            feedbackFormatFunctions.red();
         }
-    } else {
-        feedbackDisplay.innerHTML = "Nope, that's not it. Try again!";
-        feedbackFormatFunctions.red();
+        usedHint = false;
     }
-    usedHint = false;
 });

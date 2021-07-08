@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Mali&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
 
 * {
     font-family: "Exo 2", sans-serif;
@@ -37,26 +37,6 @@ body {
     height: 600px;
 }
 
-#score {
-    position: absolute;
-    top: 10%;
-    right: 10%;
-    font-family: Mali, cursive;
-    font-size: 50px;
-    color: white;
-    transition: color 1s;
-}
-
-#streak {
-    position: absolute;
-    top: 20%;
-    right: 10%;
-    font-family: Mali, cursive;
-    font-size: 50px;
-    color: white;
-    transition: color 1s;
-}
-
 #user-answer {
     border-radius: 10px;
     width: 50%;
@@ -69,4 +49,25 @@ body {
     padding: 10px;
     text-align: center;
     border-radius: 100px;
+}
+
+/* Game: Score */
+#score {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    font-size: 50px;
+}
+
+#streak {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    font-size: 50px;
+}
+
+#score, #streak {
+    font-family: "Gochi Hand", cursive;
+    color: white;
+    transition: color 1s;
 }

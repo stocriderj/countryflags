@@ -32,7 +32,12 @@ const countryFlagPairs = [
     ["brunei", "https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Brunei.svg"],
     ["bulgaria", "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Bulgaria.svg"],
     ["burkina faso", "https://upload.wikimedia.org/wikipedia/commons/3/31/Flag_of_Burkina_Faso.svg"],
-    ["burundi", "https://upload.wikimedia.org/wikipedia/commons/5/50/Flag_of_Burundi.svg"]
+    ["burundi", "https://upload.wikimedia.org/wikipedia/commons/5/50/Flag_of_Burundi.svg"],
+    ["cambodia", "https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_Cambodia.svg"],
+    ["cameroon", "https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg"],
+    ["canada", "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg"],
+    ["cape verde", "https://upload.wikimedia.org/wikipedia/commons/3/38/Flag_of_Cape_Verde.svg"],
+    ["central african republic", "https://upload.wikimedia.org/wikipedia/commons/6/6f/Flag_of_the_Central_African_Republic.svg"]
 ];
 
 // HTML Elements
@@ -80,18 +85,20 @@ function chooseCountryFlagPair() {
 function giveUp() {
     const giveUpMessages = ["Aw, man, I really thought you'd get it!", "Dang!", "Aw man.", "Ha! I thought so!", ":(", "Don't worry, we learn something new every day."];
 
-    usedHint = true;
+    if (usedHint === false) {
+        usedHint = true;
 
-    feedbackFormatFunctions.red();
+        feedbackFormatFunctions.red();
 
-    const oldFeedback = feedbackDisplay.innerText;
-    var giveUpFeedback = feedbackDisplay.innerText;
-    while (oldFeedback === giveUpFeedback) {
-        giveUpFeedback = giveUpMessages[randint(giveUpMessages.length - 1)];
+        const oldFeedback = feedbackDisplay.innerText;
+        var giveUpFeedback = feedbackDisplay.innerText;
+        while (oldFeedback === giveUpFeedback) {
+            giveUpFeedback = giveUpMessages[randint(giveUpMessages.length - 1)];
+        }
+        feedbackDisplay.innerHTML = giveUpFeedback + ` It was ${chosenCountryFlagPair[0].toUpperCase()}.`;
+
+        incorrectAnswer();
     }
-    feedbackDisplay.innerHTML = giveUpFeedback + ` It was ${chosenCountryFlagPair[0].toUpperCase()}.`;
-
-    incorrectAnswer();
 }
 
 chooseCountryFlagPair();

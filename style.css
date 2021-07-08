@@ -5,26 +5,31 @@
     font-family: "Exo 2", sans-serif;
 }
 
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
 body {
-    margin: 20px;
+    background: rgb(226, 224, 224);
+    overflow: auto;
+    height: 100%;
 }
 
-#github-link {
-    display: block;
-    float: right;
+::selection {
+    background: rgb(19, 0, 31);
+    color: white;
 }
-
-.navbar {
-    background: url("https://www.pngkit.com/png/full/108-1081664_globe-world-animation-cartoon-cartoon-earth-transparent-background.png") left center no-repeat;
-}
-
-/* #feedback {
-    transition: color 1s;
-} */
 
 .form-control {
     padding: 5px;
     padding-left: 20px;
+}
+
+
+/* Navbar */
+.navbar {
+    background: url("https://www.pngkit.com/png/full/108-1081664_globe-world-animation-cartoon-cartoon-earth-transparent-background.png") left center no-repeat;
 }
 
 /* Game */

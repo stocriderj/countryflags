@@ -110,7 +110,7 @@ gameForm.addEventListener("submit", (event) => {
     const userInput = document.getElementById("user-answer");
     const userAnswer = userInput.value;
     if (userAnswer) {
-        if (userAnswer.toLowerCase() === chosenCountryFlagPair[0]) {
+        if (userAnswer.toLowerCase().includes(chosenCountryFlagPair[0])) {
             const successMessages = ["Good job!", "Wow!", "Great job!", "Amazing!", "Check!", "Correct!", "Smart!", "Boy, are you overtaught!", "Not bad!", "Not bad at all!", "Not bad. Not bad at all!"];
             const iToldYouMessages = ["Well, at least you learn from your mistakes.", "Don't ask me for answers all the time, por favor y gracias.", "See? I'm <em>never</em> wrong!"];
 

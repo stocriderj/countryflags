@@ -69,10 +69,14 @@ body {
     top: 20%;
     right: 10%;
     font-size: 50px;
+    margin-top: 20px;
 }
 
 #score, #streak {
     font-family: "Gochi Hand", cursive;
     color: white;
     transition: color 1s;
+    background: rgb(36, 36, 36);
+    border-radius: 20px;
+    padding: 0 20px;
 }

@@ -90,6 +90,8 @@ function giveUp() {
         giveUpFeedback = giveUpMessages[randint(giveUpMessages.length - 1)];
     }
     feedbackDisplay.innerHTML = giveUpFeedback + ` It was ${chosenCountryFlagPair[0].toUpperCase()}.`;
+
+    incorrectAnswer();
 }
 
 chooseCountryFlagPair();
@@ -116,8 +118,6 @@ gameForm.addEventListener("submit", (event) => {
                 feedbackDisplay.innerHTML = successFeedback;
                 feedbackDisplay.classList.remove("text-danger");
                 feedbackDisplay.classList.add("text-success");
-
-                incorrectAnswer();
             } else {
                 while (oldFeedback === successFeedback) {
                     successFeedback = successMessages[randint(successMessages.length - 1)];

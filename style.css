@@ -16,7 +16,7 @@ body {
     height: 100%;
 }
 
-::selection {
+*::selection {
     background: rgb(19, 0, 31);
     color: white;
 }
@@ -24,6 +24,11 @@ body {
 .form-control {
     padding: 5px;
     padding-left: 20px;
+}
+
+#score::selection, #streak::selection, img::selection {
+    background: none;
+    color: currentColor;
 }
 
 

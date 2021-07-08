@@ -54,7 +54,7 @@ const incorrect = [new Audio("sounds/incorrect/incorrect1.wav")];
 // Declare Game Variables
 var usedHint = false;
 var score = 0;
-var streak = 0;
+var streak = 99;
 
 // Functions to make my life ez-er
 feedbackFormatFunctions = {
@@ -142,6 +142,14 @@ gameForm.addEventListener("submit", (event) => {
                     scoreDisplay.classList.add("text-success");
                     streakDisplay.classList.add("text-success");
                     streakDisplay.innerText = streak;
+                }
+
+                if (score === 100) {
+                    feedbackDisplay.innerHTML = "<strong class='text-success'>100! Outstanding!</strong><br><small>Hey, <a href='scratch.mit.edu/users/jacksonlens' target='_blank'>click here</a> and comment <em>IJG100OTCFG-GGBTW</em> to let me know you did it!</small>"
+                }
+
+                if (streak === 100) {
+                    feedbackDisplay.innerHTML = "<strong class='text-success'>100 in a row! What are you, a god?!</strong><br><small>Hey, <a href='scratch.mit.edu/users/jacksonlens' target='_blank'>click here</a> and comment <em>IJGASof100OTCFG-GGBTW</em> to let me know!</small>"
                 }
 
                 correct[randint(correct.length - 1)].play();

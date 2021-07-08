@@ -53,10 +53,24 @@ const incorrect = [new Audio("sounds/incorrect/incorrect1.wav")];
 
 // Declare Game Variables
 var usedHint = false;
-var score = localStorage.getItem("score");
-var streak = localStorage.getItem("streak");
+if (localStorage.getItem("score")) {
+    var score = localStorage.getItem("score");
+    var streak = localStorage.getItem("streak");
+} else {
+    var score = 0;
+    var streak = 0;
+}
 
 // Functions to make my life ez-er
+function showScoreAndStreak() {
+    scoreDisplay.innerText = score;
+    if (streak > 1) {
+        scoreDisplay.classList.add("text-success");
+        streakDisplay.classList.add("text-success");
+        streakDisplay.innerText = streak;
+    }
+}
+
 feedbackFormatFunctions = {
     red: () => {
         feedbackDisplay.classList.remove("text-success");
@@ -103,6 +117,7 @@ function giveUp() {
 }
 
 chooseCountryFlagPair();
+showScoreAndStreak();
 
 gameForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -140,13 +155,7 @@ gameForm.addEventListener("submit", (event) => {
                 localStorage.setItem("score", score);
                 localStorage.setItem("streak", streak);
 
-                scoreDisplay.innerText = score;
-
-                if (streak > 1) {
-                    scoreDisplay.classList.add("text-success");
-                    streakDisplay.classList.add("text-success");
-                    streakDisplay.innerText = streak;
-                }
+                showScoreAndStreak();
 
                 if (score === 100) {
                     feedbackDisplay.innerHTML = "<strong class='text-success'>100! Outstanding!</strong><br><small>Hey, <a href='scratch.mit.edu/users/jacksonlens' target='_blank'>click here</a> and comment <em>IJG100OTCFG-GGBTW</em> to let me know you did it!</small>"

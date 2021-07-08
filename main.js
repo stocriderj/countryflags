@@ -54,7 +54,7 @@ const incorrect = [new Audio("sounds/incorrect/incorrect1.wav")];
 // Declare Game Variables
 var usedHint = false;
 var score = 0;
-var streak = 99;
+var streak = 0;
 
 // Functions to make my life ez-er
 feedbackFormatFunctions = {

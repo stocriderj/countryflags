@@ -9,6 +9,15 @@ body {
     margin: 20px;
 }
 
+#github-link {
+    display: block;
+    float: right;
+}
+
+.navbar {
+    background: url("https://www.pngkit.com/png/full/108-1081664_globe-world-animation-cartoon-cartoon-earth-transparent-background.png") left center no-repeat;
+}
+
 /* #feedback {
     transition: color 1s;
 } */

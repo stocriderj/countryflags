@@ -31,7 +31,7 @@ body {
 
 #game {
     position: relative;
-    background: rgb(19, 0, 31) url("https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_640.png") center center no-repeat;
+    background: rgb(19, 0, 31) url("https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_640.png") right center no-repeat;
     padding: 100px;
     border-radius: 50px;
     height: 600px;

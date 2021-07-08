@@ -108,6 +108,8 @@ gameForm.addEventListener("submit", (event) => {
                 feedbackDisplay.innerHTML = successFeedback;
                 feedbackDisplay.classList.remove("text-danger");
                 feedbackDisplay.classList.add("text-success");
+
+                scoreDisplay.classList.remove("text-success");
             } else {
                 while (oldFeedback === successFeedback) {
                     successFeedback = successMessages[randint(successMessages.length - 1)];
@@ -118,12 +120,15 @@ gameForm.addEventListener("submit", (event) => {
 
                 score++;
                 scoreDisplay.innerText = score;
+                scoreDisplay.classList.add("text-success");
 
                 correct[randint(correct.length - 1)].play();
             }
         } else {
             feedbackDisplay.innerHTML = "Nope, that's not it. Try again!";
             feedbackFormatFunctions.red();
+
+            scoreDisplay.classList.remove("text-success");
         }
         usedHint = false;
     }

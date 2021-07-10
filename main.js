@@ -43,7 +43,6 @@ const countryFlagPairs = [
 // HTML Elements
 const flagDisplay = document.getElementById("flagDisplay");
 const gameForm = document.getElementById("user-answer-form");
-var chosenCountryFlagPair = null;
 const feedbackDisplay = document.getElementById("feedback");
 const scoreDisplay = document.getElementById("score");
 const streakDisplay = document.getElementById("streak");
@@ -53,21 +52,45 @@ const incorrect = [new Audio("sounds/incorrect/incorrect1.wav")];
 
 // Declare Game Variables
 var usedHint = false;
-if (localStorage.getItem("score")) {
-    var score = localStorage.getItem("score");
-    var streak = localStorage.getItem("streak");
-} else {
-    var score = 0;
-    var streak = 0;
-}
+var chosenCountryFlagPair = null;
+var score = null;
+var streak = null;
 
-// Functions to make my life ez-er
+// Functions
 function showScoreAndStreak() {
+    if (localStorage.getItem("score")) {
+        score = localStorage.getItem("score");
+        streak = localStorage.getItem("streak");
+    } else {
+        score = 0;
+        streak = 0;
+        scoreDisplay.classList.remove("text-success");
+    }
+
     scoreDisplay.innerText = score;
     if (streak > 1) {
         scoreDisplay.classList.add("text-success");
         streakDisplay.classList.add("text-success");
         streakDisplay.innerText = streak;
+    } else {
+        streakDisplay.innerText = "";
+    }
+}
+
+// LocalStorage Functions
+function saveToLocalStorage() {
+    localStorage.setItem("score", score);
+    localStorage.setItem("streak", streak);
+    localStorage.setItem("chosenCountryFlagPair", chosenCountryFlagPair);
+}
+
+function resetData() {
+    if (prompt("Are you sure? Type 'Yes, reset my data' to continue.").toLowerCase() === "yes, reset my data") {
+        localStorage.removeItem("score");
+        localStorage.removeItem("streak");
+        localStorage.removeItem("chosenCountryFlagPair");
+
+        showScoreAndStreak();
     }
 }
 
@@ -83,6 +106,8 @@ function incorrectAnswer() {
     streakDisplay.classList.remove("text-success");
     streak = 0;
     streakDisplay.innerText = "";
+
+    saveToLocalStorage();
 }
 
 function chooseCountryFlagPair() {
@@ -131,6 +156,7 @@ gameForm.addEventListener("submit", (event) => {
 
             userInput.value = "";
             chooseCountryFlagPair();
+            saveToLocalStorage();
 
             const oldFeedback = feedbackDisplay.innerText;
             var successFeedback = feedbackDisplay.innerText;
@@ -142,6 +168,11 @@ gameForm.addEventListener("submit", (event) => {
                 feedbackDisplay.classList.remove("text-danger");
                 feedbackDisplay.classList.add("text-success");
             } else {
+                score++;
+                streak++;
+                saveToLocalStorage();
+                showScoreAndStreak();
+
                 while (oldFeedback === successFeedback) {
                     successFeedback = successMessages[randint(successMessages.length - 1)];
                 }
@@ -149,23 +180,26 @@ gameForm.addEventListener("submit", (event) => {
                 feedbackDisplay.classList.remove("text-danger");
                 feedbackDisplay.classList.add("text-success");
 
-                score++;
-                streak++;
-
-                localStorage.setItem("score", score);
-                localStorage.setItem("streak", streak);
-
-                showScoreAndStreak();
-
                 if (score === 100) {
-                    feedbackDisplay.innerHTML = "<strong class='text-success'>100! Outstanding!</strong><br><small>Hey, <a href='scratch.mit.edu/users/jacksonlens' target='_blank'>click here</a> and comment <em>IJG100OTCFG-GGBTW</em> to let me know you did it!</small>"
+                    feedbackDisplay.innerHTML = "<strong class='text-success'>100! Outstanding!</strong><br><small>Hey, <a href='https://scratch.mit.edu/users/jacksonlens' target='_blank'>click here</a> and comment <em>IJG100OTCFG-GGBTW</em> to let me know you did it!</small>"
                 }
 
-                if (streak === 100) {
-                    feedbackDisplay.innerHTML = "<strong class='text-success'>100 in a row! What are you, a god?!</strong><br><small>Hey, <a href='scratch.mit.edu/users/jacksonlens' target='_blank'>click here</a> and comment <em>IJGASof100OTCFG-GGBTW</em> to let me know!</small>"
+                // Display messages depending on streak
+                switch (streak) {
+                    case 10:
+                        feedbackDisplay.innerHTML = "10 in a row!";
+                        break;
+                    case 20:
+                        feedbackDisplay.innerHTML = "20 in a row; you're good at this!";
+                        break;
+                    case 30:
+                        feedbackDisplay.innerHTML = "Streak of 30! Who am I kidding? You're too good for me!"
+                    case 100:
+                        feedbackDisplay.innerHTML = "<strong>100 in a row! What are you, a god?!</strong><br><small>Hey, <a href='https://scratch.mit.edu/users/jacksonlens' target='_blank'>click here</a> and comment <em>IJGASof100OTCFG-GGBTW</em> to let me know!</small>";
+                        break;
                 }
 
-                correct[randint(correct.length - 1)].play();
+                correct[randint(correct.length - 1)].play(); // Play a random correct sound
             }
         } else {
             feedbackDisplay.innerHTML = "Nope, that's not it. Try again!";
@@ -173,7 +207,7 @@ gameForm.addEventListener("submit", (event) => {
 
             incorrectAnswer();
 
-            incorrect[randint(incorrect.length - 1)].play();
+            incorrect[randint(incorrect.length - 1)].play(); // Play a random incorrect sound
         }
         usedHint = false;
     }

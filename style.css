@@ -41,10 +41,12 @@ body {
 
 #game {
     position: relative;
-    background: rgb(19, 0, 31) url("game-bg.png") right center no-repeat;
+    background: rgb(11, 0, 19) url("game-bg.png") right center no-repeat;
     padding: 100px;
     border-radius: 50px;
     height: 600px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 #user-answer {

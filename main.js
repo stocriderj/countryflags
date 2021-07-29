@@ -57,6 +57,10 @@ var score = null;
 var streak = null;
 
 // Functions
+function reset() {
+    scoreDisplay.classList.remove("text-success");
+}
+
 function showScoreAndStreak() {
     if (localStorage.getItem("score")) {
         score = localStorage.getItem("score");
@@ -64,13 +68,11 @@ function showScoreAndStreak() {
     } else {
         score = 0;
         streak = 0;
-        scoreDisplay.classList.remove("text-success");
     }
 
     scoreDisplay.innerText = score;
     if (streak > 1) {
         scoreDisplay.classList.add("text-success");
-        streakDisplay.classList.add("text-success");
         streakDisplay.innerText = streak;
     } else {
         streakDisplay.innerText = "";

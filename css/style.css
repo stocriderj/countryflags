@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap");
+
+/*
+Typography
+---------------------------
+-[ Spacing (px) ]-
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+-[ Font Sizing (px) ]-
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+*/
+
+* {
+  font-family: "Exo 2", sans-serif;
+}
+
+html {
+  overflow: hidden;
+  height: 100%;
+
+  font-size: 62.5%;
+}
+
+body {
+  background: rgb(226, 224, 224);
+  overflow: auto;
+  height: 100%;
+}
+
+*::selection {
+  background: rgb(19, 0, 31);
+  color: white;
+}
+
+#score::selection,
+#streak::selection,
+img::selection {
+  background: none;
+  color: currentColor;
+}
+
+/* Navbar */
+.navbar {
+  background: url("https://www.pngkit.com/png/full/108-1081664_globe-world-animation-cartoon-cartoon-earth-transparent-background.png")
+    left center no-repeat;
+
+  padding: 1.2rem;
+  font-size: 1.6rem;
+}
+
+.navbar-brand {
+  font-size: 2.4rem;
+}
+
+/* Game */
+#game {
+  position: relative;
+
+  background: rgb(11, 0, 19) url("../images/game-bg.jpeg") right center
+    no-repeat;
+  padding: 10rem;
+  border-radius: 50px;
+  height: 60rem;
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+#feedback {
+  background: rgb(68, 66, 66);
+  width: 30rem;
+  padding: 0.8rem;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 1.6rem;
+}
+
+/* Game: User Answer Form */
+#user-answer-form {
+  display: flex;
+  align-items: center;
+}
+
+#user-answer {
+  padding-left: 1.2rem;
+  border-radius: 10px;
+  width: 50%;
+  display: inline-block;
+  font-size: 1.6rem;
+  margin-right: 1.4rem;
+}
+
+#user-answer-form-btn-container {
+  display: flex;
+  justify-content: space-between;
+
+  display: inline-block;
+}
+
+#user-answer-form-btn-container button {
+  font-size: 1.4rem;
+}
+
+/* Game: Score */
+#score {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+}
+
+#streak {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  margin-top: 2.4rem;
+}
+
+#score,
+#streak {
+  font-family: "Gochi Hand", cursive;
+  color: white;
+  transition: color 1s;
+  background: rgb(36, 36, 36);
+  border-radius: 20px;
+  padding: 0 2.4rem;
+  font-size: 5.2rem;
+}

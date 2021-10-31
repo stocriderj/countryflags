@@ -1,0 +1,42 @@
+/* 768px Breakpoint */
+@media (max-width: 48em) {
+  #user-answer {
+    font-size: 1.4rem;
+  }
+
+  #score,
+  #streak {
+    font-size: 4.4rem;
+    right: 5%;
+  }
+}
+
+/* 544px Breakpoint */
+@media (max-width: 34em) {
+  #game {
+    background-image: url("../images/game-bg-small.jpeg");
+  }
+
+  #user-answer {
+    font-size: 1.2rem;
+  }
+
+  #user-answer-form-btn-container button {
+    font-size: 1.2rem;
+  }
+
+  #flagDisplay {
+    width: 70%;
+  }
+}
+
+/* 480 Breakpoint */
+@media (max-width: 30em) {
+  html {
+    font-size: 56.25%;
+  }
+
+  .container {
+    max-width: 45rem;
+  }
+}

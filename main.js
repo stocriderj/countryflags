@@ -153,8 +153,8 @@ gameForm.addEventListener("submit", (event) => {
     const userAnswer = userInput.value;
     if (userAnswer) {
         if (userAnswer.toLowerCase().includes(chosenCountryFlagPair[0])) {
-            const successMessages = ["Good job!", "Wow!", "Great job!", "Amazing!", "Check!", "Correct!", "Smart!", "Boy, are you overtaught!", "Not bad!", "Not bad at all!", "Not bad. Not bad at all!"];
-            const iToldYouMessages = ["Well, at least you learn from your mistakes.", "Don't ask me for answers all the time, por favor y gracias.", "See? I'm <em>never</em> wrong!"];
+            const successMessages = ["Good job!", "Wow!", "Great job!", "Amazing!", "Check!", "Correct!", "Smart!", "How do you know this?", "Not bad!", "Not bad at all!", "Not bad. Not bad at all!"];
+            const iToldYouMessages = ["Well, at least you learn from your mistakes.", "Don't ask me for answers all the time.", "See? I'm <em>never</em> wrong!"];
 
             userInput.value = "";
             chooseCountryFlagPair();
@@ -183,7 +183,7 @@ gameForm.addEventListener("submit", (event) => {
                 feedbackDisplay.classList.add("text-success");
 
                 if (score === 100) {
-                    feedbackDisplay.innerHTML = "<strong class='text-success'>100! Outstanding!</strong><br><small>Hey, <a href='https://scratch.mit.edu/users/jacksonlens' target='_blank'>click here</a> and comment <em>IJG100OTCFG-GGBTW</em> to let me know you did it!</small>"
+                    feedbackDisplay.innerHTML = "<strong class='text-success'>100! Outstanding!</strong><br>"
                 }
 
                 // Display messages depending on streak
@@ -197,7 +197,7 @@ gameForm.addEventListener("submit", (event) => {
                     case 30:
                         feedbackDisplay.innerHTML = "Streak of 30! Who am I kidding? You're too good for me!"
                     case 100:
-                        feedbackDisplay.innerHTML = "<strong>100 in a row! What are you, a god?!</strong><br><small>Hey, <a href='https://scratch.mit.edu/users/jacksonlens' target='_blank'>click here</a> and comment <em>IJGASof100OTCFG-GGBTW</em> to let me know!</small>";
+                        feedbackDisplay.innerHTML = "<strong>100 in a row! What are you, a god?!</strong><br>";
                         break;
                 }
 
